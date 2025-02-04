@@ -28,12 +28,14 @@ export const {
   session: { strategy: "jwt" },
   callbacks: {
     jwt({ token, user }) {
+      console.log("JWT callback:", { token, user });
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     session({ session, token }) {
+      console.log("Session callback:", { session, token });
       session.user.id = token.id as string;
       return session;
     },
