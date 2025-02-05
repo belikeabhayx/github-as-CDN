@@ -4,6 +4,7 @@ import GitHub from "next-auth/providers/github";
 // Add type safety
 declare module "next-auth" {
   interface Session {
+    accessToken?: string; // Add accessToken to session type
     user: {
       id?: string;
       name?: string | null;
@@ -50,9 +51,11 @@ export const {
       session.user = {
         ...session.user,
         id: token.githubId as string,
-      }
+      };
       session.sessionToken = token.accessToken as string;
-     
+      // Expose accessToken directly on session
+      session.accessToken = token.accessToken as string;
+
       return session;
     },
     redirect() {

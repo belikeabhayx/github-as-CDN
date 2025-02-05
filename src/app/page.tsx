@@ -15,7 +15,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className="mt-44">
       <button onClick={() => signIn("github")}>Sign in with GitHub</button>
     </div>
   );

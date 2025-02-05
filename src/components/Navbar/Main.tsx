@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Github, Twitter, Linkedin, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import RepoConnector from "../Repo-login/RepoConnector";
 
 export function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -54,26 +55,8 @@ export function Navbar() {
               </motion.span>
             </motion.div>
 
-            {/* Center section with repository link */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="hidden md:flex items-center"
-            >
-              <Button variant="ghost" size="sm" className="relative group px-4">
-                <span className="relative z-10">View Repository</span>
-                <motion.div
-                  className="absolute inset-0 bg-primary/5 rounded-md"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-              </Button>
-            </motion.div>
-
             {/* Social links with hover animations */}
-            <div className="flex items-center gap-1">
+            {/* <div className="flex items-center gap-1">
               {[
                 { icon: Github, href: "https://github.com/yourusername" },
                 { icon: Twitter, href: "https://twitter.com/yourusername" },
@@ -101,10 +84,10 @@ export function Navbar() {
                   />
                   <social.icon className="w-5 h-5 text-primary/80 group-hover:text-primary transition-colors" />
                 </motion.a>
-              ))}
+              ))} */}
 
               {/* Mobile menu button */}
-              <motion.button
+              {/* <motion.button
                 className="ml-2 p-2 md:hidden relative group"
                 whileTap={{ scale: 0.95 }}
               >
@@ -116,7 +99,25 @@ export function Navbar() {
                 />
                 <Menu className="w-5 h-5 text-primary/80 group-hover:text-primary transition-colors" />
               </motion.button>
-            </div>
+            </div> */}
+
+            {/* Center section with repository link */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="hidden md:flex items-center"
+            >
+              <Button variant="ghost" size="sm" className="relative group px-4">
+                <RepoConnector />
+                <motion.div
+                  className="absolute inset-0 bg-primary/5 rounded-md"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+              </Button>
+            </motion.div>
           </div>
         </div>
       </div>
