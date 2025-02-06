@@ -5,6 +5,7 @@ import { User } from "next-auth";
 
 const RepoConnectorNavbar = () => {
   const repos = useRepoAccess();
+  console.log("navbar", repos);
   const { data: session, status } = useSession();
   const user = session?.user || ({} as User);
 

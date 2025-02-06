@@ -16,7 +16,6 @@ import RepoConnectorNavbar from "../RepoConnectorNavbar";
 const RepoConnector = () => {
   const { data: session, status } = useSession();
   const user = session?.user || ({} as User);
-  console.log(user)
 
   const solutions = [
     {

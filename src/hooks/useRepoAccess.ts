@@ -14,7 +14,6 @@ const useRepoAccess = (): Repo[] => {
   const { data: session } = useSession();
   // Get token from session
   const token = session?.accessToken;
-  console.log(token)
 
   useEffect(() => {
 
@@ -52,7 +51,7 @@ const useRepoAccess = (): Repo[] => {
             });
         }
       });
-  }, []);
+  }, [token]);
 
   return repos;
 };
