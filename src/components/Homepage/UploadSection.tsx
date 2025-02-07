@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { Upload } from "lucide-react";
+import { Github, Linkedin, Twitter, Upload } from "lucide-react";
 import useSelectedRepo from "@/hooks/useSelectedRepo";
 import { useSession } from "next-auth/react";
+import { Button } from "../ui/button";
 
 const FileUploader = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -203,8 +204,50 @@ const FileUploader = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="max-w-2xl mx-auto mt-12"
+          className="max-w-2xl mx-auto mt-6"
         >
+          {/* Social links section directly above the dropzone */}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            {[
+              { icon: Github, href: "https://github.com/yourusername" },
+              { icon: Twitter, href: "https://twitter.com/yourusername" },
+              { icon: Linkedin, href: "https://linkedin.com/in/yourusername" },
+            ].map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative p-2 group"
+                whileHover={{ y: -2 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * index }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-primary/5 rounded-full"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <social.icon className="w-5 h-5 text-primary/80 group-hover:text-primary transition-colors" />
+              </motion.a>
+            ))}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative group whitespace-nowrap"
+            >
+              <Upload className="w-5 h-5 mr-2" />
+              <span>Check Uploads</span>
+              <motion.div
+                className="absolute inset-0 bg-primary/5 rounded-md"
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+            </Button>
+          </div>
           <div
             id="dropzone"
             className="p-8 bg-card/50 backdrop-blur-sm border-2 border-dashed border-primary/20 hover:border-primary/40 transition-colors rounded-lg cursor-pointer"
