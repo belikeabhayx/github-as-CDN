@@ -14,7 +14,6 @@ export default function Home() {
         <HeroSection />
         {/* Upload Section */}
         <UploadSection />
-        <FileUploader/>
 
         {/* Features Section */}
         <Features />

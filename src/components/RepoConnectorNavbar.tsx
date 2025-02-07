@@ -30,7 +30,7 @@ const RepoConnectorNavbar = () => {
     );
   }
 
-  return <span>Connected Repo: {repos[0]?.name}</span>;
+  return <span>{repos[0]?.name}</span>;
 };
 
 export default RepoConnectorNavbar;

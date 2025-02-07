@@ -197,7 +197,7 @@ const FileUploader = () => {
   }, [repo]);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto w-[800px] ">
       {!image && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -244,6 +244,7 @@ const FileUploader = () => {
         <div className="text-center text-muted-foreground">reading file...</div>
       )}
 
+      {/* display name if image uploaded */}
       {imageName && (
         <div className="my-2 flex">
           <textarea
@@ -304,7 +305,7 @@ const FileUploader = () => {
           </div>
         </div>
       )}
-
+      {/* this component will show the uploaded image */}
       {image && (
         <>
           {fileType === "image/png" && (
