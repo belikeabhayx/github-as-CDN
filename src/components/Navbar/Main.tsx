@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Menu } from "lucide-react";
+import { Github, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RepoConnector from "../Repo-login/RepoConnector";
@@ -28,8 +28,8 @@ export function Navbar() {
       {/* Main navbar content */}
       <div className="bg-background/70 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo section with animated hover effect */}
+          <div className="flex flex-col items-center justify-center h-auto py-4 md:flex-row md:justify-between md:h-16">
+            {/* Logo section centered on mobile */}
             <Link href={"/"}>
               <motion.div
                 className="relative flex items-center gap-2"
@@ -58,58 +58,12 @@ export function Navbar() {
               </motion.div>
             </Link>
 
-            {/* Social links with hover animations */}
-            {/* <div className="flex items-center gap-1">
-              {[
-                { icon: Github, href: "https://github.com/yourusername" },
-                { icon: Twitter, href: "https://twitter.com/yourusername" },
-                {
-                  icon: Linkedin,
-                  href: "https://linkedin.com/in/yourusername",
-                },
-              ].map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative p-2 group"
-                  whileHover={{ y: -2 }}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-primary/5 rounded-full"
-                    initial={{ scale: 0 }}
-                    whileHover={{ scale: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                  <social.icon className="w-5 h-5 text-primary/80 group-hover:text-primary transition-colors" />
-                </motion.a>
-              ))} */}
-
-            {/* Mobile menu button */}
-            {/* <motion.button
-                className="ml-2 p-2 md:hidden relative group"
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-primary/5 rounded-full"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-                <Menu className="w-5 h-5 text-primary/80 group-hover:text-primary transition-colors" />
-              </motion.button>
-            </div> */}
-
-            {/* Center section with repository link */}
+            {/* Repo Connector - Shown below logo on mobile */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="hidden md:flex items-center"
+              className="flex justify-center mt-4 md:mt-0"
             >
               <Button variant="ghost" size="sm" className="relative group px-4">
                 <RepoConnector />
