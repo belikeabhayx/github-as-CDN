@@ -199,7 +199,7 @@ const FileUploader = () => {
   }, [repo]);
 
   return (
-    <div className="container mx-auto w-[800px] ">
+    <div className="container mx-auto max-w-full w-full sm:max-w-[800px] px-4">
       {!image && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -241,9 +241,11 @@ const FileUploader = () => {
               </button>
             </Link>
           </div>
+
+          {/* File Dropzone */}
           <div
             id="dropzone"
-            className="p-8 bg-card/50 backdrop-blur-sm border-2 border-dashed border-primary/20 hover:border-primary/40 transition-colors rounded-lg cursor-pointer"
+            className="p-4 sm:p-8 bg-card/50 backdrop-blur-sm border-2 border-dashed border-primary/20 hover:border-primary/40 transition-colors rounded-lg cursor-pointer"
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
             onClick={handleClick}
