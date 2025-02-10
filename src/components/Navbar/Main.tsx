@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
+import { Github, Twitter, Linkedin, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RepoConnector from "../Repo-login/RepoConnector";
+import Link from "next/link";
 
 export function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
@@ -29,31 +30,33 @@ export function Navbar() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo section with animated hover effect */}
-            <motion.div
-              className="relative flex items-center gap-3"
-              onHoverStart={() => setIsHovered(true)}
-              onHoverEnd={() => setIsHovered(false)}
-            >
+            <Link href={"/"}>
               <motion.div
-                className="absolute inset-0 bg-primary/5 rounded-full"
-                initial={{ scale: 0 }}
-                animate={{ scale: isHovered ? 1 : 0 }}
-                transition={{ duration: 0.2 }}
-              />
-              <motion.div
-                className="relative z-10 p-2"
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 0.3 }}
+                className="relative flex items-center gap-2"
+                onHoverStart={() => setIsHovered(true)}
+                onHoverEnd={() => setIsHovered(false)}
               >
-                <Github className="w-6 h-6 text-primary" />
+                <motion.div
+                  className="absolute inset-0 bg-primary/5 rounded-full"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: isHovered ? 1 : 0 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <motion.div
+                  className="relative z-10 p-2"
+                  whileHover={{ rotate: 180 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Github className="w-6 h-6 text-primary" />
+                </motion.div>
+                <motion.span
+                  className="relative z-10 font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-chart-1"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Github CDN
+                </motion.span>
               </motion.div>
-              <motion.span
-                className="relative z-10 font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-chart-1"
-                whileHover={{ scale: 1.05 }}
-              >
-                Github Cdn
-              </motion.span>
-            </motion.div>
+            </Link>
 
             {/* Social links with hover animations */}
             {/* <div className="flex items-center gap-1">
@@ -86,8 +89,8 @@ export function Navbar() {
                 </motion.a>
               ))} */}
 
-              {/* Mobile menu button */}
-              {/* <motion.button
+            {/* Mobile menu button */}
+            {/* <motion.button
                 className="ml-2 p-2 md:hidden relative group"
                 whileTap={{ scale: 0.95 }}
               >

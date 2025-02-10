@@ -34,7 +34,7 @@ const RepoConnector = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-auto p-1">
-              <span className="mr-2 text-indigo-600 underline underline-offset-8">
+              <span className="mr-2 text-black underline underline-offset-8">
                 {session.user?.name} / <RepoConnectorNavbar />
               </span>
               <img
@@ -42,7 +42,7 @@ const RepoConnector = () => {
                 src={session.user?.image}
                 //@ts-expect-error
                 alt={session.user?.name}
-                className="size-8 rounded-full border-2 border-indigo-500"
+                className="size-8 rounded-full border-2 border-black"
               />
               <ChevronDown className="ml-2 h-5 w-5 text-gray-400" />
             </Button>
@@ -58,7 +58,7 @@ const RepoConnector = () => {
                     className="flex items-start rounded-lg p-3 hover:bg-gray-50"
                     rel="noreferrer"
                   >
-                    <item.icon className="size-6 shrink-0 text-indigo-600" />
+                    <item.icon className="size-6 shrink-0 text-black" />
                     <div className="ml-4">
                       <p className="text-base font-medium text-gray-900">
                         {item.name}
