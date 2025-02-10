@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useState, Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,11 +24,10 @@ import {
 } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-
-import UserContext from "@/contexts/authContext";
 import useDeleteGithubFile from "@/hooks/useDeleteGithubFile";
 import type { GithubFile } from "@/hooks/useRepoFiles";
 import useRepoFiles from "@/hooks/useRepoFiles";
+import { useSession } from "next-auth/react";
 
 function getPathParts(path: string) {
   return path.split("/").filter(Boolean);
@@ -41,8 +40,9 @@ function getFileIcon(file: GithubFile) {
   return File;
 }
 
-export default function Uploads() {
-  const user = useContext(UserContext);
+// Create a separate component for the content that uses useSearchParams
+function UploadsContent() {
+  const { data: session, status } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredFile, setHoveredFile] = useState<GithubFile | null>(null);
   const searchParams = useSearchParams();
@@ -67,9 +67,9 @@ export default function Uploads() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white px-4 py-8 dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white px-4 py-8 dark:from-gray-950 dark:to-gray-900 mt-24">
       <div className="mx-auto max-w-7xl">
-        {!user.isAuthenticated && (
+        {status !== "authenticated" && (
           <Card className="mb-8 border-none bg-amber-50 shadow-lg shadow-amber-100 dark:bg-amber-950/30 dark:shadow-amber-900/20">
             <CardContent className="flex items-center gap-3 p-4 text-amber-800 dark:text-amber-200">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900">
@@ -258,5 +258,14 @@ export default function Uploads() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main component wrapped with Suspense
+export default function Uploads() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UploadsContent />
+    </Suspense>
   );
 }

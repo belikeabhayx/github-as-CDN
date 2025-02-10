@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { features } from "process";
 import React from "react";
 import { Card } from "../ui/card";
 import { FolderTree, Rocket, Code } from "lucide-react";

@@ -3,21 +3,7 @@
 import { motion } from "framer-motion";
 import {
   Github,
-  FileCode2,
-  Globe,
-  Zap,
-  ArrowRight,
-  Upload,
-  FolderTree,
-  Rocket,
-  Search,
-  Code,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import UploadSection from "./UploadSection";
-import AdditionalFeatures from "./AdditionalFeatures";
-import Features from "./Features";
 
 export default function HeroSection() {
   const fadeIn = {

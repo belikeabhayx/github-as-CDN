@@ -1,4 +1,3 @@
-import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
