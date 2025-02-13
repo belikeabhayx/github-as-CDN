@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Github, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RepoConnector from "../Repo-login/RepoConnector";
 import Link from "next/link";
@@ -49,12 +48,12 @@ export function Navbar() {
                 >
                   <Github className="w-6 h-6 text-primary" />
                 </motion.div>
-                <motion.span
+                <div
                   className="relative z-10 font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-chart-1"
-                  whileHover={{ scale: 1.05 }}
+                 
                 >
                   Github CDN
-                </motion.span>
+                </div>
               </motion.div>
             </Link>
 
@@ -65,7 +64,7 @@ export function Navbar() {
               transition={{ delay: 0.3 }}
               className="flex justify-center mt-4 md:mt-0"
             >
-              <Button variant="ghost" size="sm" className="relative group px-4">
+              <div className="relative group px-4">
                 <RepoConnector />
                 <motion.div
                   className="absolute inset-0 bg-primary/5 rounded-md"
@@ -73,7 +72,7 @@ export function Navbar() {
                   whileHover={{ scale: 1 }}
                   transition={{ duration: 0.2 }}
                 />
-              </Button>
+              </div>
             </motion.div>
           </div>
         </div>

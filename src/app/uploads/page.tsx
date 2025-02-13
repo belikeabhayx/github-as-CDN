@@ -28,7 +28,7 @@ import useDeleteGithubFile from "@/hooks/useDeleteGithubFile";
 import type { GithubFile } from "@/hooks/useRepoFiles";
 import useRepoFiles from "@/hooks/useRepoFiles";
 import { useSession } from "next-auth/react";
-import { DeleteConfirmationDialog } from "@/components/DeleteConfirmationDialog";
+import { DeleteConfirmationDialog } from "@/hooks/as";
 
 function getPathParts(path: string) {
   return path.split("/").filter(Boolean);
