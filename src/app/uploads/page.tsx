@@ -28,6 +28,7 @@ import useDeleteGithubFile from "@/hooks/useDeleteGithubFile";
 import type { GithubFile } from "@/hooks/useRepoFiles";
 import useRepoFiles from "@/hooks/useRepoFiles";
 import { useSession } from "next-auth/react";
+import { DeleteConfirmationDialog } from "@/components/DeleteConfirmationDialog";
 
 function getPathParts(path: string) {
   return path.split("/").filter(Boolean);
@@ -50,7 +51,14 @@ function UploadsContent() {
 
   const path = searchParams.get("path") || "uploads";
   const { files, refreshFiles } = useRepoFiles(path);
-  const { deleteInProgress, handleDeleteFromGitHub } = useDeleteGithubFile();
+  const {
+    handleDeleteFromGitHub,
+    deleteInProgress,
+    isDialogOpen,
+    setIsDialogOpen,
+    fileToDelete,
+    confirmDelete,
+  } = useDeleteGithubFile();
   const pathParts = getPathParts(path);
 
   const copyFileNameToClipboard = (fileUrl: string) => {
@@ -68,6 +76,13 @@ function UploadsContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white px-4 py-8 dark:from-gray-950 dark:to-gray-900 mt-24">
+      <DeleteConfirmationDialog
+        isOpen={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        file={fileToDelete}
+        onConfirm={confirmDelete}
+        isDeleting={deleteInProgress}
+      />
       <div className="mx-auto max-w-7xl">
         {status !== "authenticated" && (
           <Card className="mb-8 border-none bg-amber-50 shadow-lg shadow-amber-100 dark:bg-amber-950/30 dark:shadow-amber-900/20">

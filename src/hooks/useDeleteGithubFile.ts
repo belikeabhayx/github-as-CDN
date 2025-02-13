@@ -1,48 +1,48 @@
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-
-import type { GithubFile } from './useRepoFiles';
-import useSelectedRepo from './useSelectedRepo';
+// useDeleteGithubFile.ts
+import { useState } from "react";
+import type { GithubFile } from "./useRepoFiles";
+import useSelectedRepo from "./useSelectedRepo";
+import { useToast } from "./use-toast";
 
 const useDeleteGithubFile = () => {
   const [deleteInProgress, setDeleteInProgress] = useState(false);
+  const [fileToDelete, setFileToDelete] = useState<GithubFile | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const repo = useSelectedRepo();
+  const { toast } = useToast();
 
   const handleDeleteFromGitHub = async (file: GithubFile) => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
-    // ask for confirmation
-    // eslint-disable-next-line no-alert
-    const confirm = window.confirm(
-      `Are you sure you want to delete ${file.name}?`,
-    );
+    setFileToDelete(file);
+    setIsDialogOpen(true);
+  };
 
-    if (!confirm) {
-      return;
-    }
+  const confirmDelete = async () => {
+    if (!fileToDelete) return;
 
     setDeleteInProgress(true);
 
-    const accessToken = localStorage.getItem('gaacOAuthToken');
+    const accessToken = localStorage.getItem("gaacOAuthToken");
     const repoFullName = repo?.full_name;
-    const commitMessage = `Deleted file with name ${file.name}`;
+    const commitMessage = `Deleted file with name ${fileToDelete.name}`;
     const committer = {
-      name: 'GaaCBot',
-      email: 'noreply@gaac.vercel.app',
+      name: "GaaCBot",
+      email: "noreply@gaac.vercel.app",
     };
 
     try {
-      const requestUrl = `https://api.github.com/repos/${repoFullName}/contents/${file.path}`;
-      const requestMethod = 'DELETE';
+      const requestUrl = `https://api.github.com/repos/${repoFullName}/contents/${fileToDelete.path}`;
+      const requestMethod = "DELETE";
       const requestHeaders = {
         Authorization: `Bearer ${accessToken}`,
-        Accept: 'application/vnd.github+json',
+        Accept: "application/vnd.github+json",
       };
       const requestBody = {
         message: commitMessage,
-        sha: file.sha,
+        sha: fileToDelete.sha,
         committer,
       };
 
@@ -57,22 +57,32 @@ const useDeleteGithubFile = () => {
         throw new Error(error.message);
       }
 
-      // create a toast
-      toast.success(`File ${file.name} deleted successfully`, {
-        theme: 'light',
-        position: 'top-right',
+      toast({
+        title: "Success",
+        description: `File ${fileToDelete.name} deleted successfully`,
+        variant: "default",
       });
     } catch (error) {
-      toast.error((error as any).message, {
-        theme: 'light',
-        position: 'top-right',
+      toast({
+        title: "Error",
+        description: (error as any).message,
+        variant: "destructive",
       });
     } finally {
       setDeleteInProgress(false);
+      setFileToDelete(null);
+      setIsDialogOpen(false);
     }
   };
 
-  return { handleDeleteFromGitHub, deleteInProgress };
+  return {
+    handleDeleteFromGitHub,
+    deleteInProgress,
+    isDialogOpen,
+    setIsDialogOpen,
+    fileToDelete,
+    confirmDelete,
+  };
 };
 
 export default useDeleteGithubFile;
