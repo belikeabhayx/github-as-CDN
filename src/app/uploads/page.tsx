@@ -148,41 +148,58 @@ function UploadsContent() {
             <CardContent className="p-0">
               <div className="scrollbar-thin max-h-[600px] overflow-y-auto">
                 {filteredFiles?.map((file) => (
-                  <TooltipProvider key={file.name}>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div
-                          className={cn(
-                            "group flex cursor-pointer items-center gap-3 border-b border-gray-100 p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/50",
-                            deleteInProgress &&
-                              hoveredFile?.name === file.name &&
-                              "animate-pulse bg-red-50 dark:bg-red-900/20"
-                          )}
-                          onMouseEnter={() => setHoveredFile(file)}
-                          onClick={() =>
-                            file.type !== "dir" &&
-                            copyFileNameToClipboard(file.download_url)
-                          }
-                        >
-                          <div className="rounded-lg bg-gray-100/80 p-2 transition-colors group-hover:bg-white dark:bg-gray-800 dark:group-hover:bg-gray-700">
-                            {React.createElement(getFileIcon(file), {
-                              className: "h-4 w-4",
-                            })}
-                          </div>
-                          {file.type === "dir" ? (
+                  <div
+                    key={file.name}
+                    className={cn(
+                      "group flex cursor-pointer items-center gap-3 border-b border-gray-100 p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/50",
+                      deleteInProgress &&
+                        hoveredFile?.name === file.name &&
+                        "animate-pulse bg-red-50 dark:bg-red-900/20"
+                    )}
+                    onMouseEnter={() => setHoveredFile(file)}
+                    onClick={() =>
+                      file.type !== "dir" &&
+                      copyFileNameToClipboard(file.download_url)
+                    }
+                  >
+                    <div className="rounded-lg bg-gray-100/80 p-2 transition-colors group-hover:bg-white dark:bg-gray-800 dark:group-hover:bg-gray-700">
+                      {React.createElement(getFileIcon(file), {
+                        className: "h-4 w-4",
+                      })}
+                    </div>
+
+                    {file.type === "dir" ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                             <Link
                               href={`/uploads?path=${path}/${file.name}`}
                               className="flex-1 font-medium hover:text-primary"
                             >
                               {file.name}
                             </Link>
-                          ) : (
+                          </TooltipTrigger>
+                          <TooltipContent>Open folder</TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                             <span className="flex-1 font-medium">
                               {file.name}
                             </span>
-                          )}
-                          {file.type !== "dir" && (
-                            <div className="flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                          </TooltipTrigger>
+                          <TooltipContent>Click to copy URL</TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+
+                    {file.type !== "dir" && (
+                      <div className="flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
                               <Button
                                 variant="ghost"
                                 size="icon"
@@ -194,6 +211,14 @@ function UploadsContent() {
                               >
                                 <ExternalLink className="h-4 w-4" />
                               </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Open in new tab</TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
                               <Button
                                 variant="ghost"
                                 size="icon"
@@ -206,17 +231,13 @@ function UploadsContent() {
                               >
                                 <Trash2 className="h-4 w-4" />
                               </Button>
-                            </div>
-                          )}
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        {file.type === "dir"
-                          ? "Open folder"
-                          : "Click to copy URL"}
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+                            </TooltipTrigger>
+                            <TooltipContent>Delete file</TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </CardContent>
