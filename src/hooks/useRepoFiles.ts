@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import useSelectedRepo from './useSelectedRepo';
+import { useSession } from 'next-auth/react';
 
 export type GithubFile = {
   name: string;
@@ -17,12 +18,14 @@ export type GithubFile = {
 const useRepoFiles = (path: string) => {
   const [files, setFiles] = useState<Array<GithubFile>>([]);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const {data: session} = useSession();
+   const accessToken = session?.accessToken;
 
   const repo = useSelectedRepo();
 
   useEffect(() => {
     // Get the Bearer token from localStorage
-    const token = localStorage.getItem('gaacOAuthToken');
+    const token = session?.accessToken;
 
     async function fetchFiles() {
       const response = await fetch(

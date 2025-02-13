@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { GithubFile } from "./useRepoFiles";
 import useSelectedRepo from "./useSelectedRepo";
 import { useToast } from "./use-toast";
+import { useSession } from "next-auth/react";
 
 const useDeleteGithubFile = () => {
   const [deleteInProgress, setDeleteInProgress] = useState(false);
@@ -10,6 +11,7 @@ const useDeleteGithubFile = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const repo = useSelectedRepo();
   const { toast } = useToast();
+  const {data: session} = useSession();
 
   const handleDeleteFromGitHub = async (file: GithubFile) => {
     if (typeof window === "undefined") {
@@ -25,7 +27,7 @@ const useDeleteGithubFile = () => {
 
     setDeleteInProgress(true);
 
-    const accessToken = localStorage.getItem("gaacOAuthToken");
+    const accessToken = session?.accessToken;
     const repoFullName = repo?.full_name;
     const commitMessage = `Deleted file with name ${fileToDelete.name}`;
     const committer = {

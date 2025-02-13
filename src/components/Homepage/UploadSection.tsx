@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Upload } from "lucide-react";
 import useSelectedRepo from "@/hooks/useSelectedRepo";
 import { useSession } from "next-auth/react";
-import { Button } from "../ui/button";
 import Link from "next/link";
 
 const FileUploader = () => {
