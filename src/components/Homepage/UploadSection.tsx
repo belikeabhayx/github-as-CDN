@@ -210,9 +210,12 @@ const FileUploader = () => {
           {/* Social links section directly above the dropzone */}
           <div className="flex items-center justify-center gap-2 mb-4">
             {[
-              { icon: Github, href: "https://github.com/yourusername" },
-              { icon: Twitter, href: "https://twitter.com/yourusername" },
-              { icon: Linkedin, href: "https://linkedin.com/in/yourusername" },
+              { icon: Github, href: "https://github.com/belikeabhayx" },
+              { icon: Twitter, href: "https://x.com/belikeabhayx" },
+              {
+                icon: Linkedin,
+                href: "https://www.linkedin.com/in/belikeabhayx",
+              },
             ].map((social, index) => (
               <motion.a
                 key={index}
