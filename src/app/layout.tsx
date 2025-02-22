@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       "A free GitHub CDN project for storing and serving images and assets directly from your repository",
     images: [
       {
-        url: "/public/hero-OG.png",
+        url: "/hero-OG.png",
         width: 1200,
         height: 630,
         alt: "Your Project Name Open Graph Image",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Free GitHub CDN",
     description:
       "A free GitHub CDN project for storing and serving images and assets directly from your repository",
-    images: ["/public/hero-OG.png"],
+    images: ["/hero-OG.png"],
     creator: "@belikeabhayx",
   },
 
