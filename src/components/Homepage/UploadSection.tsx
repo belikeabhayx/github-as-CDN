@@ -260,7 +260,7 @@ const FileUploader = () => {
               <p className="text-muted-foreground mb-4">
                 Press{" "}
                 <span className="px-2 py-1 text-sm bg-primary text-primary-foreground rounded">
-                  CMD
+                  CTRL
                 </span>
                 {" + "}
                 <span className="p-1 text-sm bg-primary text-primary-foreground rounded">
